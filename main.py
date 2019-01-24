@@ -8,6 +8,7 @@ from selenium.webdriver.common.by import By
 class Qiangpiao(object):
 
     def __init__(self):
+        self.student = 1
         self.login_url = "https://kyfw.12306.cn/otn/resources/login.html"
         self.init_my_url = "https://kyfw.12306.cn/otn/view/index.html"
         self.search_url = "https://kyfw.12306.cn/otn/leftTicket/init"
@@ -16,12 +17,14 @@ class Qiangpiao(object):
             executable_path="C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe")
 
     def wait_input(self):
+
         self.from_station = input("起始站：")
         self.to_station = input("目的地：")
         # 时间格式：yyyy-mm-dd
         self.depart_time = input("出发时间：格式(yyyy-mm-dd)")
         self.passengers = input("输入乘车人姓名：(多个人用英文逗号隔开)").split(",")
         self.trains = input("车次：(多个车次用英文逗号隔开)").split(',')
+        self.student = int(input("是否买学生票(学生票输入1，普通票输入0)"))
 
     def _login(self):
         self.driver.get(self.login_url)
@@ -94,8 +97,17 @@ class Qiangpiao(object):
                         if name in self.passengers:
                             passenger_label.click()
 
-                    # 获取提交订单按钮
-                    submit_btn = self.driver.find.element_by_id("submitOrder_id")
+                    # 选择学生证信息
+                    if self.student == 1:
+                        WebDriverWait(self.driver, 1000).until(
+                            EC.presence_of_element_located((By.ID, "dialog_xsertcj_ok"))
+                        )
+                        student_btn = self.driver.find_element_by_id("dialog_xsertcj_ok")
+                        student_btn.click()
+
+
+                    # 获取提交订单按钮 李东雷(学生)
+                    submit_btn = self.driver.find_element_by_id("submitOrder_id")
                     submit_btn.click()
 
                     # 判断提交对话框是否被加载进来
@@ -110,11 +122,11 @@ class Qiangpiao(object):
                     #
                     confirm_btn = self.driver.find_element_by_id("qr_submit_id")
                     confirm_btn.click()
-                    while confirm_btn:
-                        confirm_btn.click()
-                        confirm_btn = self.driver.find_element_by_id("qr_submit_id")
+                    # while confirm_btn:
+                    #     confirm_btn.click()
+                    #     confirm_btn = self.driver.find_element_by_id("qr_submit_id")
 
-                    return 
+                    return
 
     def run(self):
         self.wait_input()
