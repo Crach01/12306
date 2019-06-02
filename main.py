@@ -119,7 +119,7 @@ class Qiangpiao(object):
                         EC.presence_of_element_located((By.ID, "qr_submit_id"))
                     )
 
-                    #
+                    
                     confirm_btn = self.driver.find_element_by_id("qr_submit_id")
                     confirm_btn.click()
                     # while confirm_btn:
