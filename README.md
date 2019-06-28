@@ -11,3 +11,5 @@
 
 scrapy
 添加爬虫模块
+
+use scrapy redis
