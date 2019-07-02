@@ -9,9 +9,9 @@
 
 学习爬虫知识
 
-scrapy
-添加爬虫模块
+scrapy 添加爬虫模块
 
-use scrapy redis
+use scrapy—redis
 
+微博爬虫
 code library
