@@ -16,4 +16,4 @@ use scrapy—redis
 微博爬虫
 code library
 
-准备爬虫项目
+准备爬虫项目 爬取网易云评论、新浪微博
