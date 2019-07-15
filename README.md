@@ -17,4 +17,4 @@ use scrapy—redis
 code library
 
 准备爬虫项目 爬取网易云评论、新浪微博
-文本数据分析
+文本数据分析、新闻数据爬
